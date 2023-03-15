@@ -2,7 +2,6 @@
 
 namespace App\Jobs;
 
-use App\Traits\processXmlTrait;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
@@ -30,7 +29,6 @@ class xmltospreadsheet implements ShouldQueue
     public function handle(): void
     {
         Sheets::spreadsheet(env('GOOGLE_SPREADSHEET_ID'))
-        ->sheetById('0')
         ->range('A1:I9')
         ->append($this->data);
     }

@@ -22,7 +22,7 @@ return [
     'access_type' => 'offline',
     'approval_prompt' => 'auto',
     'prompt'           => 'consent',
-    'sheet_id' => env('GOOGLE_SHEET_ID'),
+    'sheet_id' => env('GOOGLE_SPREADSHEET_ID'),
     /*
     |----------------------------------------------------------------------------
     | Google developer key

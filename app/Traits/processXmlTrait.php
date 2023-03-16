@@ -62,8 +62,12 @@ trait processXmlTrait
 
     public function appendtoSpreadsheet($data)
         {
-            $Job = new xmltospreadsheet($data);
-            dispatch($Job)->onQueue('spreadsheet');
-        }
+            $chunkSize = 1000; // set the size of each chunk
+            $chunks = array_chunk($data, $chunkSize);
 
+            foreach ($chunks as $chunk) {
+                dispatch(new xmltospreadsheet($chunk))->onQueue('spreadsheet');
+            
+        }
+    }
 }

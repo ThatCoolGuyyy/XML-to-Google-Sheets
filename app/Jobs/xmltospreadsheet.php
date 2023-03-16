@@ -14,13 +14,13 @@ class xmltospreadsheet implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    protected $data;
+    protected $chunk;
     /**
      * Create a new job instance.
      */
-     public function __construct(array $data)
+     public function __construct(array $chunk)
     {
-        $this->data = $data;
+        $this->chunk = $chunk;
     }
 
     /**
@@ -28,8 +28,8 @@ class xmltospreadsheet implements ShouldQueue
      */
     public function handle(): void
     {
-        Sheets::spreadsheet(env('GOOGLE_SPREADSHEET_ID'))
+        Sheets::spreadsheet(config('google.sheet_id'))
         ->range('A1:I9')
-        ->append($this->data);
+        ->append($this->chunk);
     }
 }
